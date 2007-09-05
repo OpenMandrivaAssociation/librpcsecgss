@@ -1,21 +1,17 @@
 %define	major 3
-%define libname	%mklibname rpcsecgss %{major}
+%define libname     %mklibname rpcsecgss %{major}
+%define develname	%mklibname rpcsecgss -d
 
 Summary:	Allows secure rpc communication using the rpcsec_gss protocol
 Name:		librpcsecgss
-Version:	0.14
+Version:	0.15
 Release:	%mkrel 1
 License:	BSD-like
 Group:		System/Libraries
 URL:		http://www.citi.umich.edu/projects/nfsv4/linux/
-Source0:	http://www.citi.umich.edu/projects/nfsv4/linux/librpcsecgss/librpcsecgss-%{version}.tar.gz
-#BuildRequires:	krb5-devel >= 1.3
-BuildRequires:	libgssapi-devel >= 0.9
-BuildRequires:  automake1.7
-BuildRequires:  autoconf2.5
-BuildRequires:  pkgconfig
-BuildRequires:  libtool
-BuildRoot:	%{_tmppath}/%{name}-%{version}-root
+Source0:	http://www.citi.umich.edu/projects/nfsv4/linux/%{name}/%{name}-%{version}.tar.gz
+BuildRequires:	gssglue-devel
+BuildRoot:      %{_tmppath}/%{name}-%{version}
 
 %description
 Allows secure rpc communication using the rpcsec_gss protocol
@@ -31,16 +27,16 @@ Allows secure rpc communication using the rpcsec_gss protocol
 librpcsecgss allows secure rpc communication using the rpcsec_gss
 protocol.
 
-%package -n	%{libname}-devel
+%package -n	%{develname}
 Summary:	Static library and header files for the librpcsecgss library
 Group:		Development/C
-Requires:	%{libname} = %{version}
-Provides:	librpcsecgss-devel = %{version}
-Provides:	rpcsecgss-devel = %{version}
+Requires:	%{libname} = %{version}-%{release}
+Provides:	rpcsecgss-devel = %{version}-%{release}
 Obsoletes:	%{mklibname rpcsecgss 1}-devel
 Obsoletes:	%{mklibname rpcsecgss 2}-devel
+Obsoletes:	%{mklibname rpcsecgss 3}-devel
 
-%description -n	%{libname}-devel
+%description -n	%{develname}
 Allows secure rpc communication using the rpcsec_gss protocol
 librpcsecgss allows secure rpc communication using the rpcsec_gss
 protocol.
@@ -49,21 +45,14 @@ This package contains the static librpcsecgss library and its
 header files.
 
 %prep
-
 %setup -q -n librpcsecgss-%{version}
 
-# lib64 fix
-perl -pi -e "s|/lib/|/%{_lib}/|g" configure*
-
 %build
-
 %configure2_5x
-
 %make
 
 %install
-[ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
-
+rm -rf %{buildroot}
 %makeinstall_std
 
 %post -n %{libname} -p /sbin/ldconfig
@@ -71,19 +60,17 @@ perl -pi -e "s|/lib/|/%{_lib}/|g" configure*
 %postun -n %{libname} -p /sbin/ldconfig
 
 %clean
-[ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
+rm -rf %{buildroot}
 
 %files -n %{libname}
 %defattr(-,root,root)
 %doc AUTHORS COPYING ChangeLog INSTALL NEWS README
 %{_libdir}/*.so.*
 
-%files  -n %{libname}-devel
+%files  -n %{develname}
 %defattr(-,root,root)
 %{_includedir}/rpcsecgss
 %{_libdir}/*.so
 %{_libdir}/*.a
 %{_libdir}/*.la
 %{_libdir}/pkgconfig/librpcsecgss.pc
-
-
