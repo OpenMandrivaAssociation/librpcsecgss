@@ -10,6 +10,7 @@ License:	BSD-like
 Group:		System/Libraries
 URL:		http://www.citi.umich.edu/projects/nfsv4/linux/
 Source0:	http://www.citi.umich.edu/projects/nfsv4/linux/%{name}/%{name}-%{version}.tar.gz
+Patch:      librpcsecgss-0.15-autotools.patch
 BuildRequires:	gssglue-devel
 BuildRoot:      %{_tmppath}/%{name}-%{version}
 
@@ -46,8 +47,10 @@ header files.
 
 %prep
 %setup -q -n librpcsecgss-%{version}
+%patch -p 0
 
 %build
+autoreconf
 %configure2_5x
 %make
 
