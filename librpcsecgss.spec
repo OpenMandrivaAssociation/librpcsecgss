@@ -4,13 +4,12 @@
 
 Summary:	Allows secure rpc communication using the rpcsec_gss protocol
 Name:		librpcsecgss
-Version:	0.16
+Version:	0.17
 Release:	%mkrel 1
 License:	BSD-like
 Group:		System/Libraries
 URL:		http://www.citi.umich.edu/projects/nfsv4/linux/
 Source0:	http://www.citi.umich.edu/projects/nfsv4/linux/%{name}/%{name}-%{version}.tar.gz
-Patch1:      librpcsecgss-0.15-pkgconfig.patch
 BuildRequires:	gssglue-devel
 BuildRoot:      %{_tmppath}/%{name}-%{version}
 
@@ -47,7 +46,6 @@ header files.
 
 %prep
 %setup -q -n librpcsecgss-%{version}
-%patch1 -p 0
 
 %build
 %configure2_5x
