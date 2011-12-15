@@ -5,13 +5,12 @@
 Summary:	Allows secure rpc communication using the rpcsec_gss protocol
 Name:		librpcsecgss
 Version:	0.19
-Release:	%mkrel 4
+Release:	5
 License:	BSD-like
 Group:		System/Libraries
 URL:		http://www.citi.umich.edu/projects/nfsv4/linux/
 Source0:	http://www.citi.umich.edu/projects/nfsv4/linux/%{name}/%{name}-%{version}.tar.gz
 BuildRequires:	gssglue-devel
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 Allows secure rpc communication using the rpcsec_gss protocol
@@ -30,7 +29,7 @@ protocol.
 %package -n	%{develname}
 Summary:	Static library and header files for the librpcsecgss library
 Group:		Development/C
-Requires:	%{libname} = %{version}-%{release}
+Requires:	%{libname} >= %{version}-%{release}
 Provides:	rpcsecgss-devel = %{version}-%{release}
 Obsoletes:	%{mklibname rpcsecgss 1}-devel
 Obsoletes:	%{mklibname rpcsecgss 2}-devel
@@ -55,26 +54,14 @@ header files.
 rm -rf %{buildroot}
 %makeinstall_std
 
-%if %mdkversion < 200900
-%post -n %{libname} -p /sbin/ldconfig
-%endif
-
-%if %mdkversion < 200900
-%postun -n %{libname} -p /sbin/ldconfig
-%endif
-
-%clean
-rm -rf %{buildroot}
+# cleanups
+rm -f %{buildroot}%{_libdir}/*.*a
 
 %files -n %{libname}
-%defattr(-,root,root)
 %doc AUTHORS COPYING ChangeLog INSTALL NEWS README
 %{_libdir}/*.so.*
 
 %files  -n %{develname}
-%defattr(-,root,root)
 %{_includedir}/rpcsecgss
 %{_libdir}/*.so
-%{_libdir}/*.a
-%{_libdir}/*.la
 %{_libdir}/pkgconfig/librpcsecgss.pc
