@@ -11,6 +11,7 @@ Group:		System/Libraries
 Url:		http://www.citi.umich.edu/projects/nfsv4/linux/
 Source0:	http://www.citi.umich.edu/projects/nfsv4/linux/%{name}/%{name}-%{version}.tar.gz
 BuildRequires:	pkgconfig(libgssglue)
+BuildRequires:	pkgconfig(libtirpc)
 
 %description
 Allows secure rpc communication using the rpcsec_gss protocol
