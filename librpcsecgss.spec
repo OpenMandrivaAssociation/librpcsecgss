@@ -5,11 +5,12 @@
 Summary:	Allows secure rpc communication using the rpcsec_gss protocol
 Name:		librpcsecgss
 Version:	0.19
-Release:	6
+Release:	7
 License:	BSD-like
 Group:		System/Libraries
 Url:		http://www.citi.umich.edu/projects/nfsv4/linux/
 Source0:	http://www.citi.umich.edu/projects/nfsv4/linux/%{name}/%{name}-%{version}.tar.gz
+Patch0:		librpcsecgss-0.19-libtirpc.patch
 BuildRequires:	pkgconfig(libgssglue)
 BuildRequires:	pkgconfig(libtirpc)
 
@@ -39,6 +40,8 @@ header files.
 
 %prep
 %setup -q
+%patch0 -p1 -b .tirpc~
+autoreconf -fi
 
 %build
 %configure2_5x \
