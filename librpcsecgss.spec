@@ -1,6 +1,7 @@
 %define	major	3
 %define libname	%mklibname rpcsecgss %{major}
 %define devname	%mklibname rpcsecgss -d
+%bcond_with	crosscompile
 
 Summary:	Allows secure rpc communication using the rpcsec_gss protocol
 Name:		librpcsecgss
@@ -44,6 +45,9 @@ header files.
 autoreconf -fi
 
 %build
+%if %{with crosscompile}
+export ac_cv_func_malloc_0_nonnull=yes
+%endif
 %configure2_5x \
 	--disable-static
 %make
