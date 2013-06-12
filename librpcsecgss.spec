@@ -41,7 +41,7 @@ header files.
 
 %prep
 %setup -q
-%patch0 -p1 -b .tirpc~
+%apply_patches
 autoreconf -fi
 
 %build
@@ -56,7 +56,7 @@ export ac_cv_func_malloc_0_nonnull=yes
 %makeinstall_std
 
 %files -n %{libname}
-%{_libdir}/*.so.*
+%{_libdir}/librpcsecgss.so.%{major}*
 
 %files  -n %{devname}
 %doc AUTHORS COPYING ChangeLog INSTALL NEWS README
