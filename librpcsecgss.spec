@@ -6,7 +6,7 @@
 Summary:	Allows secure rpc communication using the rpcsec_gss protocol
 Name:		librpcsecgss
 Version:	0.19
-Release:	17
+Release:	18
 License:	BSD-like
 Group:		System/Libraries
 Url:		http://www.citi.umich.edu/projects/nfsv4/linux/
