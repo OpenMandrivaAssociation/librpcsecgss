@@ -9,7 +9,7 @@ Version:	0.19
 Release:	19
 License:	BSD-like
 Group:		System/Libraries
-Url:		http://www.citi.umich.edu/projects/nfsv4/linux/
+Url:		https://www.citi.umich.edu/projects/nfsv4/linux/
 Source0:	http://www.citi.umich.edu/projects/nfsv4/linux/%{name}/%{name}-%{version}.tar.gz
 Patch0:		librpcsecgss-0.19-libtirpc.patch
 BuildRequires:	pkgconfig(libgssglue)
