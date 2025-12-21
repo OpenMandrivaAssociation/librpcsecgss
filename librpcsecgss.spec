@@ -12,6 +12,11 @@ Group:		System/Libraries
 Url:		https://www.citi.umich.edu/projects/nfsv4/linux/
 Source0:	http://www.citi.umich.edu/projects/nfsv4/linux/%{name}/%{name}-%{version}.tar.gz
 Patch0:		librpcsecgss-0.19-libtirpc.patch
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	pkgconfig(libgssglue)
 BuildRequires:	pkgconfig(libtirpc)
 
